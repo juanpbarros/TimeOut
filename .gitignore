@@ -24,7 +24,7 @@ build/
 
 # IDE
 .vscode/
-.idea/
+.idea/pip freeze > requirements.txt
 
 # Sistema
 .DS_Store
