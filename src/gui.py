@@ -1,4 +1,5 @@
 import tkinter as tk
+import threading
 from tkinter import messagebox
 
 from src.scheduler import schedule_shutdown, cancel_shutdown
@@ -29,15 +30,30 @@ def start_gui():
             messagebox.showerror("Error", "Enter a valid time in HH:MM format.")
             return
 
-        seconds = schedule_shutdown(target_time)
-        messagebox.showinfo(
-            "Success",
-            f"Shutdown scheduled.\nRemaining time: {seconds} seconds."
-        )
+        def run_schedule():
+            seconds = schedule_shutdown(target_time)
+            window.after(
+                0,
+                lambda: messagebox.showinfo(
+                    "Success",
+                    f"Shutdown scheduled.\nRemaining time: {seconds} seconds."
+                )
+            )
+
+        threading.Thread(target=run_schedule, daemon=True).start()
 
     def handle_cancel():
-        cancel_shutdown()
-        messagebox.showinfo("Canceled", "Scheduled shutdown canceled.")
+        def run_cancel():
+            cancel_shutdown()
+            window.after(
+                0,
+                lambda: messagebox.showinfo(
+                    "Canceled",
+                    "Scheduled shutdown canceled."
+                )
+            )
+
+        threading.Thread(target=run_cancel, daemon=True).start()
 
     time_entry.bind("<FocusIn>", clear_placeholder)
 
