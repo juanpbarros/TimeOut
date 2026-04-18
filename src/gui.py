@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 
-from scheduler import schedule_shutdown, cancel_shutdown
-from utils import validate_time
+from src.scheduler import schedule_shutdown, cancel_shutdown
+from src.utils import validate_time
 
 
 def start_gui():
