@@ -29,3 +29,8 @@ build/
 # Sistema
 .DS_Store
 Thumbs.db
+
+
+# Imagens para o README
+*.png
+*.jpg
