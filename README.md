@@ -24,7 +24,8 @@ Whether you're downloading large files, running tasks overnight, or just want yo
 
 ## 🖼️ Preview
 
-![alt text](image.png)
+<img width="397" height="261" alt="image" src="https://github.com/user-attachments/assets/6134e066-008d-4eae-aacc-c5b0bbfecdcd" />
+
 
 ---
 
