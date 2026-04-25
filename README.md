@@ -16,15 +16,17 @@ Whether you're downloading large files, running tasks overnight, or just want yo
 
 - 🕒 Schedule shutdown at a specific time (HH:MM)
 - ❌ Cancel scheduled shutdown anytime
+- ⏱️ Quick time increment buttons (+1h, +10min)
+- 🧠 Smart input formatting (numeric-only with automatic `:`)
 - 🖥️ Clean and minimal graphical interface (GUI)
 - ⚡ Fast execution with no installation required
-- 🧠 Smart handling of past times (automatically schedules for the next day)
+- 🔄 Automatic handling of past times (schedules for the next day)
 
 ---
 
 ## 🖼️ Preview
 
-<img width="397" height="261" alt="image" src="https://github.com/user-attachments/assets/6134e066-008d-4eae-aacc-c5b0bbfecdcd" />
+<img width="397" height="308" alt="image" src="https://github.com/user-attachments/assets/f2d58858-b678-40dc-920f-f7963cb610ac" />
 
 
 ---
@@ -34,9 +36,12 @@ Whether you're downloading large files, running tasks overnight, or just want yo
 👉 Go to the latest release:  
 https://github.com/juanpbarros/TimeOut/releases
 
+### How to use
+
 1. Download the `.zip` file  
 2. Extract it  
-3. Run `TimeOut.exe`  
+3. Open the folder  
+4. Run `TimeOut.exe`  
 
 ---
 
