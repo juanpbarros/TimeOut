@@ -11,14 +11,30 @@ from src.utils import validate_time
 def start_gui():
     window = tk.Tk()
     window.title("TimeOut")
-    window.geometry("320x220")
+    window.geometry("340x240")
     window.resizable(False, False)
+
+    is_less_mode = tk.BooleanVar(value=False)
 
     title_label = tk.Label(window, text="TimeOut", font=("Arial", 16, "bold"))
     title_label.pack(pady=(15, 10))
 
-    time_entry = tk.Entry(window, width=18, font=("Arial", 12), justify="center")
-    time_entry.pack(pady=5)
+    input_frame = tk.Frame(window)
+    input_frame.pack(pady=5)
+
+    time_entry = tk.Entry(input_frame, width=18, font=("Arial", 12), justify="center")
+    time_entry.pack(side=tk.LEFT, padx=(0, 5))
+
+    def clear_time_entry():
+        time_entry.delete(0, tk.END)
+
+    clear_button = tk.Button(
+        input_frame,
+        text="×",
+        width=3,
+        command=clear_time_entry,
+    )
+    clear_button.pack(side=tk.LEFT)
 
     def on_time_entry_change(_event=None):
         current_value = time_entry.get()
@@ -32,13 +48,37 @@ def start_gui():
         current_value = time_entry.get().strip()
 
         if current_value and not validate_time(current_value):
-            messagebox.showerror("Error", "Enter a valid time before adding minutes.")
+            messagebox.showerror("Error", "Enter a valid time before changing it.")
             return
 
         updated_time = add_minutes_to_time(current_value, minutes)
 
         time_entry.delete(0, tk.END)
         time_entry.insert(0, updated_time)
+
+    def toggle_increment_mode():
+        is_less_mode.set(not is_less_mode.get())
+
+        if is_less_mode.get():
+            plus_10_button.config(
+                text="-10 min",
+                command=lambda: handle_time_increment(-10),
+            )
+            plus_1h_button.config(
+                text="-1h",
+                command=lambda: handle_time_increment(-60),
+            )
+            toggle_mode_button.config(text="More")
+        else:
+            plus_10_button.config(
+                text="+10 min",
+                command=lambda: handle_time_increment(10),
+            )
+            plus_1h_button.config(
+                text="+1h",
+                command=lambda: handle_time_increment(60),
+            )
+            toggle_mode_button.config(text="Less")
 
     def handle_schedule():
         target_time = time_entry.get().strip()
@@ -92,6 +132,14 @@ def start_gui():
         command=lambda: handle_time_increment(60),
     )
     plus_1h_button.pack(side=tk.LEFT, padx=4)
+
+    toggle_mode_button = tk.Button(
+        increment_frame,
+        text="Less",
+        width=8,
+        command=toggle_increment_mode,
+    )
+    toggle_mode_button.pack(side=tk.LEFT, padx=4)
 
     schedule_button = tk.Button(
         window,
