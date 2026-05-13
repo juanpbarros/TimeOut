@@ -16,7 +16,9 @@ Whether you're downloading large files, running tasks overnight, or just want yo
 
 - 🕒 Schedule shutdown at a specific time (HH:MM)
 - ❌ Cancel scheduled shutdown anytime
-- ⏱️ Quick time increment buttons (+1h, +10min)
+- ⏱️ Quick time adjustment buttons (+10 min, +1h)
+- 🔄 Toggle adjustment mode (Less / More) for quick corrections (-10 min, -1h)
+- ❌ Clear input button (×) for fast reset
 - 🧠 Smart input formatting (numeric-only with automatic `:`)
 - 🖥️ Clean and minimal graphical interface (GUI)
 - ⚡ Fast execution with no installation required
@@ -26,7 +28,8 @@ Whether you're downloading large files, running tasks overnight, or just want yo
 
 ## 🖼️ Preview
 
-<img width="397" height="308" alt="image" src="https://github.com/user-attachments/assets/f2d58858-b678-40dc-920f-f7963cb610ac" />
+<img width="423" height="335" alt="image" src="https://github.com/user-attachments/assets/96421b5c-5a52-486f-b2bd-54cd427ba266" />
+
 
 
 ---
