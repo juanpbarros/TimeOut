@@ -47,6 +47,9 @@ def start_gui():
     def handle_time_increment(minutes: int):
         current_value = time_entry.get().strip()
 
+        if current_value.endswith(":") and current_value != ":":
+            current_value = current_value.rstrip(":") + ":00"
+
         if current_value and not validate_time(current_value):
             messagebox.showerror("Error", "Enter a valid time before changing it.")
             return
@@ -88,27 +91,33 @@ def start_gui():
             return
 
         def run_schedule():
-            seconds = schedule_shutdown(target_time)
-            window.after(
-                0,
-                lambda: messagebox.showinfo(
-                    "Success",
-                    f"Shutdown scheduled.\nRemaining time: {seconds} seconds.",
-                ),
-            )
+            try:
+                seconds = schedule_shutdown(target_time)
+                window.after(
+                    0,
+                    lambda: messagebox.showinfo(
+                        "Success",
+                        f"Shutdown scheduled.\nRemaining time: {seconds} seconds.",
+                    ),
+                )
+            except RuntimeError as e:
+                window.after(0, lambda: messagebox.showerror("Error", str(e)))
 
         threading.Thread(target=run_schedule, daemon=True).start()
 
     def handle_cancel():
         def run_cancel():
-            cancel_shutdown()
-            window.after(
-                0,
-                lambda: messagebox.showinfo(
-                    "Canceled",
-                    "Scheduled shutdown canceled.",
-                ),
-            )
+            try:
+                cancel_shutdown()
+                window.after(
+                    0,
+                    lambda: messagebox.showinfo(
+                        "Canceled",
+                        "Scheduled shutdown canceled.",
+                    ),
+                )
+            except RuntimeError as e:
+                window.after(0, lambda: messagebox.showerror("Error", str(e)))
 
         threading.Thread(target=run_cancel, daemon=True).start()
 

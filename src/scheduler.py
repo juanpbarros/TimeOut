@@ -1,5 +1,5 @@
+import subprocess
 from datetime import datetime, timedelta
-import os
 
 
 def calculate_seconds_until(target_time_str: str) -> int:
@@ -21,9 +21,25 @@ def calculate_seconds_until(target_time_str: str) -> int:
 
 def schedule_shutdown(target_time_str: str) -> int:
     seconds = calculate_seconds_until(target_time_str)
-    os.system(f"shutdown -s -t {seconds}")
+    result = subprocess.run(
+        ["shutdown", "-s", "-t", str(seconds)],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"Failed to schedule shutdown: {result.stderr.strip()}"
+        )
     return seconds
 
 
 def cancel_shutdown() -> None:
-    os.system("shutdown -a")
+    result = subprocess.run(
+        ["shutdown", "-a"],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"Failed to cancel shutdown: {result.stderr.strip()}"
+        )
